@@ -22,6 +22,8 @@ class IncidentTracker {
     private var beepPlayer: AVAudioPlayer?
     private var bleepPlayer: AVAudioPlayer?
     
+    public var beepCallback: (() -> Void)?
+    
     private init() {}
     
     public func addScores(_ newScores: [FaceScore]) {
@@ -59,13 +61,13 @@ class IncidentTracker {
         if self.currentIncidentStart == nil {
             return
         }
-
         guard let beepUrl = Bundle.main.url(forResource: "beep", withExtension: "mp3"),
             let bleepUrl = Bundle.main.url(forResource: "bleep", withExtension: "mp3") else {
             return
         }
         
         do {
+            beepCallback?()
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
             try AVAudioSession.sharedInstance().setActive(true)
             

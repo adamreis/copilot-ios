@@ -88,6 +88,22 @@ class ViewController: UIViewController, ARSessionDelegate {
                 IncidentTracker.sharedInstance.addScores(response.scores)
             }
         }
+        
+        IncidentTracker.sharedInstance.beepCallback = {
+            if let wnd = self.view{
+                
+                let v = UIView(frame: wnd.bounds)
+                v.backgroundColor = UIColor.white
+                v.alpha = 1
+                
+                wnd.addSubview(v)
+                UIView.animate(withDuration: 1, animations: {
+                    v.alpha = 0.0
+                }, completion: {(finished:Bool) in
+                    v.removeFromSuperview()
+                })
+            }
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
