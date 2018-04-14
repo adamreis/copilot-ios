@@ -31,12 +31,7 @@ class ViewController: UIViewController, ARSessionDelegate {
 
     var nodeForContentType = [VirtualContentType: VirtualFaceNode]()
     let contentUpdater = VirtualContentUpdater()
-    var selectedVirtualContent: VirtualContentType = .overlayModel {
-        didSet {
-            // Set the selected content based on the content type.
-            contentUpdater.virtualFaceNode = nodeForContentType[selectedVirtualContent]
-        }
-    }
+    var selectedVirtualContent: VirtualContentType = .faceGeometry
 
     // MARK: - View Controller Life Cycle
 
@@ -194,37 +189,5 @@ class ViewController: UIViewController, ARSessionDelegate {
         }
         alertController.addAction(restartAction)
         present(alertController, animated: true, completion: nil)
-    }
-}
-
-extension ViewController: UIPopoverPresentationControllerDelegate {
-
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        /*
-         Popover segues should not adapt to fullscreen on iPhone, so that
-         the AR session's view controller stays visible and active.
-        */
-        return .none
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        /*
-         All segues in this app are popovers even on iPhone. Configure their popover
-         origin accordingly.
-        */
-        guard let popoverController = segue.destination.popoverPresentationController, let button = sender as? UIButton else { return }
-        popoverController.delegate = self
-        popoverController.sourceRect = button.bounds
-
-        // Set up the view controller embedded in the popover.
-        let contentSelectionController = popoverController.presentedViewController as! ContentSelectionController
-
-        // Set the initially selected virtual content.
-        contentSelectionController.selectedVirtualContent = selectedVirtualContent
-
-        // Update our view controller's selected virtual content when the selection changes.
-        contentSelectionController.selectionHandler = { [unowned self] newSelectedVirtualContent in
-            self.selectedVirtualContent = newSelectedVirtualContent
-        }
     }
 }
