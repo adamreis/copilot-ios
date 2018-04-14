@@ -15,6 +15,7 @@
 		3929C4931E89EC2C00E00B60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3929C4921E89EC2C00E00B60 /* Assets.xcassets */; };
 		3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 3929C49E1E89EE4400E00B60 /* Models.scnassets */; };
 		39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */; };
+		6619E4B4645EB9E2070C2EB3 /* Pods_Copilot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2274F5A3BEB64321AA8BF89 /* Pods_Copilot.framework */; };
 		C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41366B81EB80DD400EC054A /* StatusViewController.swift */; };
 		C81DA0C61F4CC79A002AF1DA /* GlassesOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81DA0C51F4CC79A002AF1DA /* GlassesOverlay.swift */; };
 		C8904E501F4CF1CE0089E530 /* VirtualContentUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8904E4F1F4CF1CE0089E530 /* VirtualContentUpdater.swift */; };
@@ -35,12 +36,15 @@
 		3929C4971E89EC2C00E00B60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3929C49E1E89EE4400E00B60 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
 		39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6B3FE2813591B2120BF8D0A2 /* Pods-Copilot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Copilot.release.xcconfig"; path = "Pods/Target Support Files/Pods-Copilot/Pods-Copilot.release.xcconfig"; sourceTree = "<group>"; };
+		C2274F5A3BEB64321AA8BF89 /* Pods_Copilot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Copilot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C41366B81EB80DD400EC054A /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		C81DA0C51F4CC79A002AF1DA /* GlassesOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassesOverlay.swift; sourceTree = "<group>"; };
 		C8904E4F1F4CF1CE0089E530 /* VirtualContentUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualContentUpdater.swift; sourceTree = "<group>"; };
 		C8904E511F4CF9EC0089E530 /* VirtualContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualContentType.swift; sourceTree = "<group>"; };
 		C8904E541F4CFD000089E530 /* VirtualFaceContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualFaceContent.swift; sourceTree = "<group>"; };
 		C8904E561F4CFD730089E530 /* Mask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
+		DB952D8970A637541AA40D22 /* Pods-Copilot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Copilot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Copilot/Pods-Copilot.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,12 +52,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6619E4B4645EB9E2070C2EB3 /* Pods_Copilot.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08B9905B4602C8148C640961 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C2274F5A3BEB64321AA8BF89 /* Pods_Copilot.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1488324C1EFC3ED00043E0AB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +85,8 @@
 				11063F3B1EBE651B0033EE6D /* README.md */,
 				3929C48A1E89EC2C00E00B60 /* Copilot */,
 				3929C4891E89EC2C00E00B60 /* Products */,
+				CD09D65600B23E03B5B0E009 /* Pods */,
+				08B9905B4602C8148C640961 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,6 +132,15 @@
 			path = VirtualFaceContent;
 			sourceTree = "<group>";
 		};
+		CD09D65600B23E03B5B0E009 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DB952D8970A637541AA40D22 /* Pods-Copilot.debug.xcconfig */,
+				6B3FE2813591B2120BF8D0A2 /* Pods-Copilot.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -124,9 +148,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3929C49A1E89EC2C00E00B60 /* Build configuration list for PBXNativeTarget "Copilot" */;
 			buildPhases = (
+				DE00F9E9E821040CAB3257D0 /* [CP] Check Pods Manifest.lock */,
 				3929C4841E89EC2C00E00B60 /* Sources */,
 				3929C4851E89EC2C00E00B60 /* Frameworks */,
 				3929C4861E89EC2C00E00B60 /* Resources */,
+				487AA0B52BF7388A5B35673A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -186,6 +212,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		487AA0B52BF7388A5B35673A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Copilot/Pods-Copilot-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Copilot/Pods-Copilot-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE00F9E9E821040CAB3257D0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Copilot-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3929C4841E89EC2C00E00B60 /* Sources */ = {
@@ -333,6 +400,7 @@
 		};
 		3929C49B1E89EC2C00E00B60 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB952D8970A637541AA40D22 /* Pods-Copilot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
@@ -352,6 +420,7 @@
 		};
 		3929C49C1E89EC2C00E00B60 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B3FE2813591B2120BF8D0A2 /* Pods-Copilot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
