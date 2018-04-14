@@ -1,24 +1,41 @@
 PODS:
   - Alamofire (4.7.1)
+  - AWSAuthCore (2.6.16):
+    - AWSCore (= 2.6.16)
+  - AWSCore (2.6.16)
+  - AWSMobileClient (2.6.16):
+    - AWSAuthCore (= 2.6.16)
+  - AWSS3 (2.6.16):
+    - AWSCore (= 2.6.16)
   - ModelMapper (8.0.0)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - AWSMobileClient (~> 2.6.13)
+  - AWSS3
   - ModelMapper
   - SwiftyJSON (~> 3.1)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
+    - AWSAuthCore
+    - AWSCore
+    - AWSMobileClient
+    - AWSS3
     - ModelMapper
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
+  AWSAuthCore: d0f6fcbe8957c3dc5f67ce4ac198cc1f2696ee17
+  AWSCore: 314df68684e338310409c6a3b050e28932deb6ff
+  AWSMobileClient: 04b2a1665c3535a47b60a44c9f28e5211139baf3
+  AWSS3: 218b24bc68387f0c715fd37168f9db6cbec9d0a7
   ModelMapper: a258c5f8e1422e0e826c8265a3e89ae1b329c3a6
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 71eae2463504f171d775bfffed91dff187c52360
+PODFILE CHECKSUM: 9a5bc7a3b917b452952d2515e042037e7998c6f8
 
 COCOAPODS: 1.5.0

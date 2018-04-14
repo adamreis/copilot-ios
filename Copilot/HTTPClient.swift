@@ -27,9 +27,11 @@ private extension Transform {
 private extension ULU {
     func toDictionary() -> [String: Any] {
         let dictionary: [String: Any] = [
-            "user_id": 1,
-            "head_positions": self.headPositions.isEmpty ? [] : [self.headPositions.map { $0.toDictionary() }.last!],
-            "camera_positions": self.cameraPositions.isEmpty ? [] : [self.cameraPositions.map { $0.toDictionary() }.last!],
+            "user_id": Constants.userID,
+//            "head_positions": self.headPositions.isEmpty ? [] : [self.headPositions.map { $0.toDictionary() }.last!],
+//            "camera_positions": self.cameraPositions.isEmpty ? [] : [self.cameraPositions.map { $0.toDictionary() }.last!],
+            "head_positions": self.headPositions.map { $0.toDictionary() },
+            "camera_positions": self.cameraPositions.map { $0.toDictionary() },
             "location": [
                 "lat": 37.386251,
                 "lng": -122.0668649,
@@ -50,10 +52,15 @@ struct HTTPClient {
         let camera_count = (ulu.toDictionary()["camera_positions"] as? [Any])!.count
         print("head: \(head_count); camera: \(camera_count)")
         
-        
-//        Alamofire.request(url, method: .post, parameters: ulu.toDictionary(), encoding: JSONEncoding.default, headers: nil).response { response in
-//            let json = JSON(response.data)
-//            print(json)
-//        }
+        let start = Date()
+        Alamofire.request(url, method: .post, parameters: ulu.toDictionary(), encoding: JSONEncoding.default, headers: nil).responseJSON { response in
+            switch response.result {
+                case .success(let JSON):
+                    print("Success in \(Date().timeIntervalSince(start))s: \(JSON)")
+                    let response = ULUResponse.from(JSON as! NSDictionary)
+                case .failure(let error):
+                    print("Request failed with error: \(error)")
+            }
+        }
     }
 }

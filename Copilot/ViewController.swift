@@ -43,6 +43,15 @@ class ViewController: UIViewController, ARSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        do {
+            try FileManager.default.createDirectory(
+                at: URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("upload"),
+                withIntermediateDirectories: true,
+                attributes: nil)
+        } catch {
+            print("Creating 'upload' directory failed. Error: \(error)")
+        }
+        
         sceneView.delegate = contentUpdater
         sceneView.session.delegate = self
         sceneView.automaticallyUpdatesLighting = true
@@ -69,7 +78,7 @@ class ViewController: UIViewController, ARSessionDelegate {
         
         resetTracking()
         
-        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+        self.timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
             let manager = HeadPositionManager.sharedInstance
             
             objc_sync_enter(manager.headPositions)

@@ -12,8 +12,8 @@ import ARKit
 private let kHeadPositionSampleRateMs = 100
 private let kMaxHeadPositionSamples = 300 // 30s
 
-private let kImageSampleRateMs = 750
-private let kMaxImages = 11
+private let kImageSampleRateMs = 333
+private let kMaxImages = 300 // 100s
 
 func heapSize(_ obj: AnyObject) -> Int {
     return malloc_size(Unmanaged.passRetained(obj).toOpaque())
@@ -55,13 +55,15 @@ class HeadPositionManager {
         
         let noRecentImage: Bool = (self.cameraImages.last?.timestamp_ms ?? 0) + kImageSampleRateMs < transform.timestamp_ms
         if noRecentImage {
-//            DispatchQueue.global(qos: .default).async {
-                self.cameraImages.append(Image(frame.capturedImage))
-                if self.cameraImages.count > kMaxImages {
-                    self.cameraImages.removeFirst()
-                }
-//                print("num images: \(self.cameraImages.count)")
+            let image = Image(frame.capturedImage)
+            self.cameraImages.append(image)
+            if self.cameraImages.count > kMaxImages {
+                self.cameraImages.removeFirst()
+            }
+//            if self.cameraPositions.count == 1 {
+//                S3Client.uploadPhoto(image)
 //            }
+            print("num images: \(self.cameraImages.count)")
         }
     }
     

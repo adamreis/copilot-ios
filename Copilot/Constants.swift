@@ -10,4 +10,7 @@ import Foundation
 
 struct Constants {
     static let APIBaseURL = "https://copilotyc.herokuapp.com"
+    static let userID = 1
+    static let S3BucketName = "copilot-incident-images"
+//    static let S3BucketName = "copilot-userfiles-mobilehub-1405660298"
 }
