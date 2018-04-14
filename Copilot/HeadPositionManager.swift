@@ -63,12 +63,26 @@ class HeadPositionManager {
 //            if self.cameraPositions.count == 1 {
 //                S3Client.uploadPhoto(image)
 //            }
-            print("num images: \(self.cameraImages.count)")
+//            print("num images: \(self.cameraImages.count)")
         }
     }
     
     public func clear() {
         self.headPositions.removeAll()
         self.cameraPositions.removeAll()
+    }
+    
+    public func uploadImagesBetween(start: Date, end: Date) {
+        let matchingPhotos = self.cameraImages.filter { $0.date > start && $0.date < end }
+        if matchingPhotos.isEmpty{
+            print("ERROR. How the hell did we have an incident without photos?")
+            return
+        }
+        
+        let incidentId: String = "\(Int(start.timeIntervalSince1970 * 1000))"
+        S3Client.uploadPhotos(matchingPhotos) { urls in
+            print("Successfully uploaded photos: \(urls)")
+            HTTPClient.reportIncident(urls: urls, incident_id: incidentId)
+        }
     }
 }

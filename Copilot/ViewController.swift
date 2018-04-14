@@ -78,7 +78,7 @@ class ViewController: UIViewController, ARSessionDelegate {
         
         resetTracking()
         
-        self.timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [weak self] _ in
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             let manager = HeadPositionManager.sharedInstance
             
             objc_sync_enter(manager.headPositions)
@@ -89,7 +89,9 @@ class ViewController: UIViewController, ARSessionDelegate {
             
             objc_sync_exit(manager.headPositions)
             objc_sync_exit(manager.cameraPositions)
-            HTTPClient.sendULU(ulu: ulu)
+            HTTPClient.sendULU(ulu: ulu) { response in
+                IncidentTracker.sharedInstance.addScores(response.scores)
+            }
         }
     }
 

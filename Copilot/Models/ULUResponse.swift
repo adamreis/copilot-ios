@@ -12,6 +12,9 @@ import Mapper
 public struct FaceScore {
     public let score: Double
     public let date: Date
+    public var timestamp_ms: Int {
+        return Int(self.date.timeIntervalSince1970 * 1000)
+    }
 }
 
 extension FaceScore: Mappable {

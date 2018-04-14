@@ -46,20 +46,38 @@ private extension ULU {
 }
 
 struct HTTPClient {
-    static func sendULU(ulu: ULU) {
+    static func sendULU(ulu: ULU, success: @escaping (ULUResponse) -> Void) {
         let url = Constants.APIBaseURL + "/ulu"
         let head_count = (ulu.toDictionary()["head_positions"] as? [Any])!.count
         let camera_count = (ulu.toDictionary()["camera_positions"] as? [Any])!.count
-        print("head: \(head_count); camera: \(camera_count)")
-        
+//        print("head: \(head_count); camera: \(camera_count)")
         let start = Date()
         Alamofire.request(url, method: .post, parameters: ulu.toDictionary(), encoding: JSONEncoding.default, headers: nil).responseJSON { response in
+            print("Time: \(Date().timeIntervalSince(start))s")
             switch response.result {
                 case .success(let JSON):
-                    print("Success in \(Date().timeIntervalSince(start))s: \(JSON)")
-                    let response = ULUResponse.from(JSON as! NSDictionary)
+                    success(ULUResponse.from(JSON as! NSDictionary)!)
                 case .failure(let error):
                     print("Request failed with error: \(error)")
+            }
+        }
+    }
+    
+    static func reportIncident(urls: [String], incident_id: String) {
+        let parameters: [String: Any] = [
+            "incident_id": incident_id,
+            "user_id": Constants.userID,
+            "images": urls
+        ]
+        let start = Date()
+        Alamofire.request(Constants.APIBaseURL + "/incident", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
+            print("Time: \(Date().timeIntervalSince(start))s")
+            switch response.result {
+            case .success(let JSON):
+//                success(ULUResponse.from(JSON as! NSDictionary)!)
+                print("Successfully reported incident: \(JSON)")
+            case .failure(let error):
+                print("Request failed with error: \(error)")
             }
         }
     }

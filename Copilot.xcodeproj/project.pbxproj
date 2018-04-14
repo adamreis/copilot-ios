@@ -132,8 +132,8 @@
 				C41366B81EB80DD400EC054A /* StatusViewController.swift */,
 				1488324C1EFC3ED00043E0AB /* Resources */,
 				ED44000B2081C3C200C79E86 /* Constants.swift */,
-				ED44000F2081D5BA00C79E86 /* HeadPositionManager.swift */,
 				ED9300EB2082564200EC7FE5 /* S3Client.swift */,
+				ED44000F2081D5BA00C79E86 /* HeadPositionManager.swift */,
 				ED5969FD208281ED00C0B4EC /* IncidentTracker.swift */,
 			);
 			path = Copilot;

@@ -12,5 +12,5 @@ struct Constants {
     static let APIBaseURL = "https://copilotyc.herokuapp.com"
     static let userID = 1
     static let S3BucketName = "copilot-incident-images"
-//    static let S3BucketName = "copilot-userfiles-mobilehub-1405660298"
+    static let S3BasePath = "https://s3-us-west-1.amazonaws.com/\(S3BucketName)/"
 }
