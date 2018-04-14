@@ -73,8 +73,9 @@ class VirtualContentUpdater: NSObject, ARSCNViewDelegate {
         guard let faceAnchor = anchor as? ARFaceAnchor else { return }
         
         virtualFaceNode?.update(withFaceAnchor: faceAnchor)
-        let pos = faceAnchor.transform.position()
-        print(String(format: "x: %.3f, y: %.3f, z: %.3f", pos.x, pos.y, pos.z))
+        HeadPositionManager.sharedInstance.addHeadPosition(headPosition: Transform(faceAnchor.transform))
+//        let pos = faceAnchor.transform.position()
+//        print(String(format: "x: %.3f, y: %.3f, z: %.3f", pos.x, pos.y, pos.z))
         
     }
 }

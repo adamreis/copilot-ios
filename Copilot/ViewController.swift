@@ -22,16 +22,15 @@ class ViewController: UIViewController, ARSessionDelegate {
     }()
 
     // MARK: Properties
-
+    weak var timer: Timer?
+    
     /// Convenience accessor for the session owned by ARSCNView.
     var session: ARSession {
         return sceneView.session
     }
 
     var nodeForContentType = [VirtualContentType: VirtualFaceNode]()
-    
     let contentUpdater = VirtualContentUpdater()
-    
     var selectedVirtualContent: VirtualContentType = .overlayModel {
         didSet {
             // Set the selected content based on the content type.
@@ -69,12 +68,27 @@ class ViewController: UIViewController, ARSessionDelegate {
         UIApplication.shared.isIdleTimerDisabled = true
         
         resetTracking()
+        
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            let manager = HeadPositionManager.sharedInstance
+            
+            objc_sync_enter(manager.headPositions)
+            objc_sync_enter(manager.cameraPositions)
+            
+            let ulu = ULU(headPositions: manager.headPositions, cameraPositions: manager.cameraPositions)
+            manager.clear()
+            
+            objc_sync_exit(manager.headPositions)
+            objc_sync_exit(manager.cameraPositions)
+            HTTPClient.sendULU(ulu: ulu)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         session.pause()
+        self.timer?.invalidate()
     }
     
     // MARK: - Setup
@@ -109,6 +123,10 @@ class ViewController: UIViewController, ARSessionDelegate {
         DispatchQueue.main.async {
             self.displayErrorMessage(title: "The AR session failed.", message: errorMessage)
         }
+    }
+    
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        HeadPositionManager.sharedInstance.addFrame(frame)
     }
 
     func sessionWasInterrupted(_ session: ARSession) {

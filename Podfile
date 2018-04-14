@@ -5,4 +5,5 @@ use_frameworks!
 target 'Copilot' do
     pod 'Alamofire', '~> 4.7'
     pod 'SwiftyJSON', '~> 3.1'
+    pod 'ModelMapper'
 end
