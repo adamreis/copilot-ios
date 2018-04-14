@@ -15,6 +15,7 @@ class Mask: SCNNode, VirtualFaceContent {
         
         material.diffuse.contents = UIColor.lightGray
         material.lightingModel = .physicallyBased
+        material.fillMode = .lines
         
         super.init()
         self.geometry = geometry
