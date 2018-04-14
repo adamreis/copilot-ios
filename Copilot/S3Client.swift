@@ -11,30 +11,39 @@ import AWSS3
 
 struct S3Client {
     static var uploadMap: [Int: [String: Bool?]] = [:]
+    static var pendingUploads: [String] = []
+    static var successfulUploads: [String] = []
     
     static func uploadPhotos(_ images: [Image], finished: @escaping ([String]) -> Void) {
-        let uploadKey = images.first?.timestamp_ms ?? 0
-        uploadMap[uploadKey] = [:]
         images.forEach { image in
             let fileName = "\(Constants.userID)_\(image.timestamp_ms).jpg"
-            uploadMap[uploadKey]![fileName] = nil
+            pendingUploads.append(fileName)
             self.uploadPhoto(image, fileName: fileName) { success in
-                uploadMap[uploadKey]![fileName] = success
-                let unfinished = uploadMap[uploadKey]!.filter { name, status in
-                    status == nil
+                pendingUploads = pendingUploads.filter { $0 != fileName }
+                if success {
+                    successfulUploads.append(Constants.S3BasePath + fileName)
+                }
+                if pendingUploads.isEmpty {
+                    finished(successfulUploads)
+                    successfulUploads = []
                 }
                 
-                if unfinished.count == 0 {
-                    var succeeded: [String] = []
-                    for (name, status) in uploadMap[uploadKey]! {
-                        if status == true {
-                            succeeded.append(Constants.S3BasePath + name)
-                        }
-                    }
-                    print("\(succeeded.count) succeeded; \(uploadMap[uploadKey]!.count - succeeded.count) failed")
-                    uploadMap[uploadKey] = nil
-                    finished(succeeded)
-                }
+//                uploadMap[uploadKey]![fileName] = success
+//                let unfinished = uploadMap[uploadKey]!.filter { name, status in
+//                    status == nil
+//                }
+//
+//                if unfinished.count == 0 {
+//                    var succeeded: [String] = []
+//                    for (name, status) in uploadMap[uploadKey]! {
+//                        if status == true {
+//                            succeeded.append(Constants.S3BasePath + name)
+//                        }
+//                    }
+//                    print("\(succeeded.count) succeeded; \(uploadMap[uploadKey]!.count - succeeded.count) failed")
+//                    uploadMap[uploadKey] = nil
+//                    finished(succeeded)
+//                }
             }
         }
         

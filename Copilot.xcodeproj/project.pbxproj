@@ -30,6 +30,8 @@
 		ED440014208237FE00C79E86 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED440013208237FE00C79E86 /* Image.swift */; };
 		ED4400162082503700C79E86 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = ED4400152082503700C79E86 /* awsconfiguration.json */; };
 		ED5969FE208281ED00C0B4EC /* IncidentTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5969FD208281ED00C0B4EC /* IncidentTracker.swift */; };
+		ED596A022082B53100C0B4EC /* bleep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED596A002082B53100C0B4EC /* bleep.mp3 */; };
+		ED596A032082B53100C0B4EC /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED596A012082B53100C0B4EC /* beep.mp3 */; };
 		ED9300EC2082564200EC7FE5 /* S3Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9300EB2082564200EC7FE5 /* S3Client.swift */; };
 		EDD7EDFA2081B2C30081429B /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD7EDF92081B2C30081429B /* HTTPClient.swift */; };
 /* End PBXBuildFile section */
@@ -63,6 +65,8 @@
 		ED440013208237FE00C79E86 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		ED4400152082503700C79E86 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		ED5969FD208281ED00C0B4EC /* IncidentTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncidentTracker.swift; sourceTree = "<group>"; };
+		ED596A002082B53100C0B4EC /* bleep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bleep.mp3; sourceTree = "<group>"; };
+		ED596A012082B53100C0B4EC /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		ED9300EB2082564200EC7FE5 /* S3Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Client.swift; sourceTree = "<group>"; };
 		EDD7EDF92081B2C30081429B /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +94,7 @@
 		1488324C1EFC3ED00043E0AB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ED5969FF2082B53100C0B4EC /* Sounds */,
 				ED4400152082503700C79E86 /* awsconfiguration.json */,
 				3929C49E1E89EE4400E00B60 /* Models.scnassets */,
 				3929C4921E89EC2C00E00B60 /* Assets.xcassets */,
@@ -166,6 +171,15 @@
 				6B3FE2813591B2120BF8D0A2 /* Pods-Copilot.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		ED5969FF2082B53100C0B4EC /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				ED596A002082B53100C0B4EC /* bleep.mp3 */,
+				ED596A012082B53100C0B4EC /* beep.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		EDD7EDFE2081B3D20081429B /* Models */ = {
@@ -247,6 +261,8 @@
 				39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */,
 				3929C4931E89EC2C00E00B60 /* Assets.xcassets in Resources */,
 				3929C4911E89EC2C00E00B60 /* Main.storyboard in Resources */,
+				ED596A032082B53100C0B4EC /* beep.mp3 in Resources */,
+				ED596A022082B53100C0B4EC /* bleep.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

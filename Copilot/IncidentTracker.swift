@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import AVFoundation
 
-private let kMaxScoreAgeMs = 4000 // 40s
+private let kMaxScoreAgeMs = 3000 // 3s
 private let kIndividualScoreThreshold = 0.5
 private let kIncidentTriggerThreshold = 0.6
 private let kMinimumScoreCount = 20
@@ -18,6 +19,8 @@ class IncidentTracker {
     
     private var scores: [FaceScore] = []
     private var currentIncidentStart: Date?
+    private var beepPlayer: AVAudioPlayer?
+    private var bleepPlayer: AVAudioPlayer?
     
     private init() {}
     
@@ -44,10 +47,47 @@ class IncidentTracker {
         } else if self.currentIncidentStart == nil && self.scores.count >= kMinimumScoreCount && offenseRatio > kIncidentTriggerThreshold {
             self.currentIncidentStart = above_threshold.first!.date
             print("INCIDENT STARTED")
+            self.playAlertSound()
         }
     }
     
     private func reportIncident(start: Date, end: Date) {
         HeadPositionManager.sharedInstance.uploadImagesBetween(start: start, end: end)
+    }
+    
+    private func playAlertSound() {
+        if self.currentIncidentStart == nil {
+            return
+        }
+
+        guard let beepUrl = Bundle.main.url(forResource: "beep", withExtension: "mp3"),
+            let bleepUrl = Bundle.main.url(forResource: "bleep", withExtension: "mp3") else {
+            return
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            self.beepPlayer = try AVAudioPlayer(contentsOf: beepUrl, fileTypeHint: AVFileType.mp3.rawValue)
+            guard let beepPlayer = self.beepPlayer else { return }
+            beepPlayer.prepareToPlay()
+            
+            self.bleepPlayer = try AVAudioPlayer(contentsOf: bleepUrl, fileTypeHint: AVFileType.mp3.rawValue)
+            guard let bleepPlayer = self.bleepPlayer else { return }
+            bleepPlayer.prepareToPlay()
+            
+            beepPlayer.play()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.22) {
+                bleepPlayer.play()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.playAlertSound()
+            }
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
     }
 }
